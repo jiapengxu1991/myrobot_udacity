@@ -24,42 +24,55 @@ void process_image_callback(const sensor_msgs::Image img)
 {
 
     int white_pixel = 255;
-    float h_pos = 0.0
-    float lin_x, ang_z = 0.0
-    float left_threshould = img->width/3
-    float right_threshould = img->width/3 * 2
-    for (size_t i = 0; i < img->height * img->step; i += 3) {
-        int red = img->data[i];
-        int green = img->data[i + 1];
-        int blue = img->data[i + 2];
-        if (red == 255 && green == 255 && blue == 255){
-            float h_pos = (i / 3) % img->width
-            if h_pos<left_threshould{
+    float h_pos = 0.0;
+    float lin_x, ang_z = 0.0;
+    float left_threshould = img.width/3;
+    float right_threshould = img.width/3 * 2;
+    int moving = 0;
+    int print = 1;
+    for (size_t i = 0; i < img.height * img.step; i += 3) {
+        if (print == 1){
+            ROS_INFO_STREAM("analysing image now");
+            print =0;
+            }
+        int red = img.data[i];
+        int green = img.data[i + 1];
+        int blue = img.data[i + 2];
+        if (red == white_pixel && green == white_pixel && blue == white_pixel){
+            float h_pos = (i / 3) % img.width;
+            moving = 1;
+            if (h_pos<left_threshould){
                 // turn left
-                ang_z = 0.5
-                lin_x = 0.0
+                ang_z = 0.5;
+                lin_x = 0.0;
+                break;
             }
             else if (h_pos>=left_threshould && h_pos<=right_threshould){
                 //move forward
-                ang_z = 0.0
-                lin_x = 0.5
+                ang_z = 0.0;
+                lin_x = 0.5;
+                break;
             }
-            else if h_pos>right_threshould{
+            else if (h_pos>right_threshould){
                 // turn right
-                ang_z = -0.5
-                lin_x = 0.0
+                ang_z = -0.5;
+                lin_x = 0.0;
+                break;
             }
             }
-        else{
-            //stop
-            ang_z = 0.0
-            lin_x = 0.0
-        }
-        drive_robot(lin_x, ang_z)
-        break
     }
-}
+    
+    if (moving == 1){
+        drive_robot(lin_x, ang_z);
+    }
+    else{
+        ROS_INFO_STREAM("No ball in the image");
+        lin_x = 0.0;
+        ang_z = 0.0;
+        drive_robot(lin_x, ang_z);
+    }
 
+}
 
 
 int main(int argc, char** argv)
