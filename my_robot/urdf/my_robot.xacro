@@ -36,26 +36,6 @@
       <geometry>
         <box size=".4 .25 .1"/>
       </geometry>
-      <material name="red">
-        <color rgba="1 0 0 1"/> 
-      </material>
-    </visual>
-
-    <collision name='head_collision'>
-      <origin xyz="0.2 0 0" rpy=" 0 0 0"/>
-      <geometry>
-        <cylinder radius="0.125" length="0.1"/>
-      </geometry>
-    </collision>
-
-    <visual name='head_visual'>
-      <origin xyz="0.2 0 0" rpy=" 0 0 0"/>
-      <geometry>
-        <cylinder radius="0.125" length="0.1"/>
-      </geometry>
-      <material name="red">
-        <color rgba="1 0 0 1"/> 
-      </material>
     </visual>
 
     <collision name='back_caster_collision'>
@@ -70,45 +50,61 @@
       <geometry>
         <sphere radius="0.06"/>
       </geometry>
-      <material name="orange">
-        <color rgba="1 0.5 0 1"/> 
-      </material>
     </visual>
-
-    <!-- <collision name='front_caster_collision'>
-      <origin xyz="0.2 0 -0.05" rpy=" 0 0 0"/>
-      <geometry>
-        <sphere radius="0.0599"/>
-      </geometry>
-    </collision> -->
-
-    <!-- <visual name='front_caster_visual'>
-      <origin xyz="0.2 0 -0.05" rpy=" 0 0 0"/>
-      <geometry>
-        <sphere radius="0.06"/>
-      </geometry>
-      <material name="orange">
-        <color rgba="1 0.5 0 1"/> 
-      </material>
-    </visual> -->
-    
   </link>
+
+  <gazebo reference="chassis">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <joint type="fixed" name="head_joint">
+    <origin xyz="0.2 0 0" rpy="0 0 0"/>
+    <child link="head"/>
+    <parent link="chassis"/>
+  </joint>
+
+  <link name='head'>
+    <inertial>
+      <mass value="10.0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+
+    <collision name='head_collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <cylinder radius="0.125" length="0.1"/>
+      </geometry>
+    </collision>
+
+    <visual name='head_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <cylinder radius="0.125" length="0.1"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <gazebo reference="head">
+    <material>Gazebo/Green</material>
+  </gazebo>
 
   <joint type="continuous" name="left_wheel_hinge">
     <origin xyz="0.1 0.15 0" rpy="0 0 0"/>
     <child link="left_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
-    <limit effort="10000" velocity="1000"/>
+    <!-- <limit effort="10000" velocity="1000"/> -->
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
   <link name='left_wheel'>
-    <!-- <pose>0 0 0.1 0 0 0</pose> -->
 
     <inertial>
       <mass value="5.0"/>
-      <!-- <origin xyz="0.0 0 0" rpy=" 0 1.5707 1.5707"/> -->
       <inertia
           ixx="0.1" ixy="0" ixz="0"
           iyy="0.1" iyz="0"
@@ -128,27 +124,26 @@
       <geometry>
         <cylinder radius="0.11" length= "0.05"/>
       </geometry>
-      <material name="lw_yellow">
-        <color rgba="1 1 0 1"/> 
-      </material>
     </visual>
   </link>
+
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
   
   <joint type="continuous" name="right_wheel_hinge">
     <origin xyz="0.1 -0.15 0" rpy="0 0 0"/>
     <child link="right_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
-    <limit effort="10000" velocity="1000"/>
+    <!-- <limit effort="10000" velocity="1000"/> -->
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
   <link name='right_wheel'>
-    <!-- <pose>0 0 0.1 0 0 0</pose> -->
 
     <inertial>
       <mass value="5.0"/>
-      <!-- <origin xyz="0.0 0 0" rpy=" 0 1.5707 1.5707"/> -->
       <inertia
           ixx="0.1" ixy="0" ixz="0"
           iyy="0.1" iyz="0"
@@ -168,11 +163,12 @@
       <geometry>
         <cylinder radius="0.11" length= "0.05"/>
       </geometry>
-      <material name="rw_yellow">
-        <color rgba="1 1 0 1"/> 
-      </material>
     </visual>
   </link>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
 
   <joint type="fixed" name="camera_joint">
     <origin xyz="0.33 0 0" rpy="0 0 0"/>
@@ -185,7 +181,6 @@
 
     <inertial>
       <mass value="0.1"/>
-      <!-- <origin xyz="0.0 0 0" rpy=" 0 0 0"/> -->
       <inertia
           ixx="1e-6" ixy="0" ixz="0"
           iyy="1e-6" iyz="0"
@@ -205,11 +200,13 @@
       <geometry>
         <box size="0.05 0.05 0.05"/>
       </geometry>
-      <material name="green">
-        <color rgba="0 1 0 1"/> 
-      </material>
     </visual>
   </link>
+
+  <gazebo reference="camera">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
 
   <joint type="fixed" name="hokuyo_joint">
     <origin xyz="0.27 0 0.08" rpy="0 0 0"/>
@@ -222,7 +219,6 @@
 
     <inertial>
       <mass value="1e-5"/>
-      <!-- <origin xyz="0.0 0 0" rpy=" 0 0 0"/> -->
       <inertia
           ixx="1e-6" ixy="0" ixz="0"
           iyy="1e-6" iyz="0"
