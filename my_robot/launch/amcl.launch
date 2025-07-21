@@ -13,8 +13,9 @@
     <param name="odom_model_type" value="diff-corrected"/>
     <param name="base_frame_id" value="robot_footprint"/>
     <param name="global_frame_id" value="map"/>
-    <param name="initial_pose_x" value="4.562816"/>
-    <param name="initial_pose_y" value="-3.126402"/>
+    <param name="initial_pose_x" value="2.270"/>
+    <param name="initial_pose_y" value="0.018"/>
+    <param name="initial_pose_a" value="-3.136"/>
   </node>
   
   <!-- Move Base -->
