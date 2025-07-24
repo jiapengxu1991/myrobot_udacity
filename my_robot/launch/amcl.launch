@@ -16,6 +16,28 @@
     <param name="initial_pose_x" value="2.270"/>
     <param name="initial_pose_y" value="0.018"/>
     <param name="initial_pose_a" value="-3.136"/>
+    <!-- Laser settings -->
+    <param name="laser_max_range" value="12.0" />
+    <param name="laser_min_range" value="0.1" />
+    <param name="laser_model_type" value="likelihood_field" />
+    <param name="update_min_d" value="0.2" />
+    <param name="update_min_a" value="0.2" />
+    
+    <!-- Particle filter settings -->
+    <param name="min_particles" value="500" />
+    <param name="max_particles" value="1000" />
+    <param name="resample_interval" value="1" />
+    
+    <!-- Odometry model tuning -->
+    <param name="odom_model_type" value="diff" />
+    <param name="odom_alpha1" value="0.2" />
+    <param name="odom_alpha2" value="0.2" />
+    <param name="odom_alpha3" value="0.2" />
+    <param name="odom_alpha4" value="0.02" />
+
+    <!-- TF buffer time -->
+    <param name="transform_tolerance" value="0.5" />
+
   </node>
   
   <!-- Move Base -->
