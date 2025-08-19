@@ -207,6 +207,15 @@
     <material>Gazebo/Red</material>
   </gazebo>
 
+  <joint name="camera_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
+    <parent link="camera"/>
+    <child link="camera_d"/>
+  </joint>
+
+  <link name="camera_d">
+  </link>
+
 
   <joint type="fixed" name="hokuyo_joint">
     <origin xyz="0.27 0 0.08" rpy="0 0 0"/>
