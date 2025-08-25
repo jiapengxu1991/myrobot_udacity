@@ -1,7 +1,0 @@
-recovery_behaviors:
-  - name: clear_local
-    type: clear_costmap_recovery/ClearCostmapRecovery
-  - name: rotate_recovery
-    type: rotate_recovery/RotateRecovery
-  - name: clear_global
-    type: clear_costmap_recovery/ClearCostmapRecovery

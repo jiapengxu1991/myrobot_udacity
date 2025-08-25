@@ -27,28 +27,42 @@
     <collision name='collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
       <geometry>
-        <box size=".4 .25 .1"/>
+        <box size=".4 .2 .1"/>
       </geometry>
     </collision>
 
     <visual name='chassis_visual'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <box size=".4 .25 .1"/>
+        <box size=".4 .2 .1"/>
       </geometry>
     </visual>
 
+    <collision name='front_caster_collision'>
+      <origin xyz="0.15 0 -0.05" rpy=" 0 0 0"/>
+        <geometry>
+          <sphere radius="0.0499"/>
+        </geometry>
+      </collision>
+
+      <visual name='front_caster_visual'>
+        <origin xyz="0.15 0 -0.05" rpy=" 0 0 0"/>
+        <geometry>
+          <sphere radius="0.05"/>
+        </geometry>
+      </visual>
+
     <collision name='back_caster_collision'>
-      <origin xyz="-0.12 0 -0.05" rpy=" 0 0 0"/>
+      <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
       <geometry>
-        <sphere radius="0.0599"/>
+        <sphere radius="0.0499"/>
       </geometry>
     </collision>
 
     <visual name='back_caster_visual'>
-      <origin xyz="-0.12 0 -0.05" rpy=" 0 0 0"/>
+      <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
       <geometry>
-        <sphere radius="0.06"/>
+        <sphere radius="0.05"/>
       </geometry>
     </visual>
   </link>
@@ -57,7 +71,7 @@
     <material>Gazebo/Green</material>
   </gazebo>
 
-  <joint type="fixed" name="head_joint">
+  <!-- <joint type="fixed" name="head_joint">
     <origin xyz="0.2 0 0" rpy="0 0 0"/>
     <child link="head"/>
     <parent link="chassis"/>
@@ -90,14 +104,14 @@
   
   <gazebo reference="head">
     <material>Gazebo/Green</material>
-  </gazebo>
+  </gazebo> -->
 
   <joint type="continuous" name="left_wheel_hinge">
-    <origin xyz="0.1 0.15 0" rpy="0 0 0"/>
+    <origin xyz="0.0 0.15 0" rpy="0 0 0"/>
     <child link="left_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
-    <!-- <limit effort="10000" velocity="1000"/> -->
+    <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
@@ -115,14 +129,14 @@
     <collision name='lw_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder radius="0.11" length= "0.05"/>
+        <cylinder radius="0.1" length= "0.05"/>
       </geometry>
     </collision>
 
     <visual name='lw_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.11" length= "0.05"/>
+        <cylinder radius="0.1" length= "0.05"/>
       </geometry>
     </visual>
   </link>
@@ -132,11 +146,11 @@
   </gazebo>
   
   <joint type="continuous" name="right_wheel_hinge">
-    <origin xyz="0.1 -0.15 0" rpy="0 0 0"/>
+    <origin xyz="0.0 -0.15 0" rpy="0 0 0"/>
     <child link="right_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
-    <!-- <limit effort="10000" velocity="1000"/> -->
+    <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
@@ -154,14 +168,14 @@
     <collision name='rw_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
       <geometry>
-        <cylinder radius="0.11" length= "0.05"/>
+        <cylinder radius="0.1" length= "0.05"/>
       </geometry>
     </collision>
 
     <visual name='rw_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.11" length= "0.05"/>
+        <cylinder radius="0.1" length= "0.05"/>
       </geometry>
     </visual>
   </link>
@@ -171,7 +185,7 @@
   </gazebo>
 
   <joint type="fixed" name="camera_joint">
-    <origin xyz="0.33 0 0" rpy="0 0 0"/>
+    <origin xyz="0.2 0 0" rpy="0 0 0"/>
     <child link="camera"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -218,7 +232,7 @@
 
 
   <joint type="fixed" name="hokuyo_joint">
-    <origin xyz="0.27 0 0.08" rpy="0 0 0"/>
+    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
     <child link="hokuyo"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
