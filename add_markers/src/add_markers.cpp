@@ -29,13 +29,13 @@ void statusCallback(const std_msgs::String::ConstPtr& msg)
   ROS_INFO("I heard: [%s]", msg->data.c_str());
 
   if (status == "pick_up_start") {
-    showMarker(-4.35, -2.72);
+    showMarker(4.5507, 2.1794);
   } 
   else if (status == "reached_pick_up") {
     hideMarker();
   } 
   else if (status == "reached_drop_off") {
-    showMarker(-2.28, 2.76);
+    showMarker(3.9584, -3.28554);
   }
 }
 
